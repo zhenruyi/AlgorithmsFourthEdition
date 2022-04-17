@@ -1,20 +1,18 @@
 package main
 
 import (
-	"AlgorithmsFourthEdition/Chapter02Sorting"
 	"fmt"
-	"math/rand"
-	"time"
+	"os"
 )
 
 func main() {
-	a := make([]int, 0)
-	rand.Seed(time.Now().UnixNano())
-	for i := 0; i < 20; i++ {
-		intn := rand.Intn(100)
-		a = append(a, intn)
+	file, err := os.Open("d:/Documents/test.txt")
+	if err != nil {
+		fmt.Println("open error")
+		return
 	}
-	fmt.Println(a)
-	Chapter02Sorting.MergeSortBottom2Top(a)
-	fmt.Println(a)
+	defer file.Close()
+	bytes := make([]byte, 3)
+	n, _ := file.Read(bytes)
+	fmt.Println(string(bytes), " ", n)
 }
